@@ -1,6 +1,7 @@
 package cryst.blogapi.controller;
 
 
+import cryst.blogapi.entities.Post;
 import cryst.blogapi.payloads.ApiResponse;
 import cryst.blogapi.payloads.PostDto;
 import cryst.blogapi.payloads.PostResponse;
@@ -73,6 +74,14 @@ public class PostController {
       return new ResponseEntity<PostDto>(updatePost, HttpStatus.OK);
 
 
+    }
+
+    @GetMapping("/posts/search/{keywords}")
+    public ResponseEntity<List<PostDto>> searchByPost(
+            @PathVariable("keywords") String keywords
+    ){
+        List<PostDto> result = this.postService.searchPosts(keywords);
+        return  new ResponseEntity<List<PostDto>>(result, HttpStatus.OK);
     }
 
 }
